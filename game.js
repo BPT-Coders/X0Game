@@ -2,7 +2,7 @@ var curPlayer = 'X';
 var downCount = 1;
 var hods = []; //история ходов
 var winPlayer;
-
+var ii = [];
 var msg;
 
 function writeHistory(id){
@@ -50,6 +50,7 @@ function gameOver(){
 }
 
 function startScreen() {
+    getIIHods();
     $('#gameField').html('');
     for (i = 1; i < 4; i++){
         for (j = 1; j < 4; j++){
@@ -57,6 +58,23 @@ function startScreen() {
         }
         $('#gameField').append('<br>');
     }
+}
+
+function getIIHods(){
+    $.ajax({
+			async: false,
+			type: "POST",
+			url: "./ajax/loadGames.php",
+            data: 'symbol=0',
+			dataType:"json",
+			error: function () {	
+				alert( "Ошибка чтения списка разрешённых ip" );
+			},
+			success: function (response) {
+				ii = response;
+                console.log(ii);
+			}
+	});
 }
 
 function hod(el){
@@ -142,7 +160,7 @@ function makePCHod(){
 }
 
 function getEmptyField(){
-    if ($("#11").val() == " "){
+    /*if ($("#11").val() == " "){
             return '11';
         }
     if ($("#12").val() == " "){
@@ -171,4 +189,35 @@ function getEmptyField(){
     if ($("#33").val() == " "){
             return '33';
         }
+    */
+    
+    // TODO предварительная проверка: является ли клетка пустой
+    // Если клетка уже занята, то данная стратегия должна быть удалена из массива. Если все стратегии закончатся - бот должен последовательно заполнять клетки с помощю выше закоментированного кода
+    if(downCount == '1'){
+        return ii[0].h1;
+    }
+    if(downCount == '2'){
+        return ii[0].h2;
+    }
+    if(downCount == '3'){
+        return ii[0].h3;
+    }
+    if(downCount == '4'){
+        return ii[0].h4;
+    }
+    if(downCount == '5'){
+        return ii[0].h5;
+    }
+    if(downCount == '6'){
+        return ii[0].h6;
+    }
+    if(downCount == '7'){
+        return ii[0].h7;
+    }
+    if(downCount == '8'){
+        return ii[0].h8;
+    }
+    if(downCount == '9'){
+        return ii[0].h9;
+    }
 }
