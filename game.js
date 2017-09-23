@@ -3,6 +3,7 @@ var downCount = 1;
 var hods = []; //история ходов
 var winPlayer;
 var ii = [];
+var curStrategy;
 var msg;
 var pcPlayer;
 
@@ -14,8 +15,11 @@ function startScreen() {
 }
 
 function gameScreen(symbolPC){
-    getIIHods();
     pcPlayer = symbolPC;
+    getIIHods();
+    if(ii.length > 0){
+        curStrategy = ii[ii.length - 1];
+    }
     $('#gameField').html('');
     for (i = 1; i < 4; i++){
         for (j = 1; j < 4; j++){
@@ -72,8 +76,8 @@ function writeHistory(id){
     }
     curHod = JSON.stringify(curHod);
     hods.push(curHod);
-    console.clear();
-    console.log(hods);
+    //console.clear();
+    //console.log(hods);
     //console.log(downCount);
 }
 
@@ -88,7 +92,7 @@ function getIIHods(){
 			async: false,
 			type: "POST",
 			url: "./ajax/loadGames.php",
-            data: 'symbol=0',
+            data: 'symbol=' + pcPlayer,
 			dataType:"json",
 			error: function () {	
 				alert( "Ошибка чтения списка разрешённых ip" );
@@ -96,6 +100,7 @@ function getIIHods(){
 			success: function (response) {
 				ii = response;
                 console.log(ii);
+                console.log(ii.length);
 			}
 	});
 }
@@ -180,73 +185,171 @@ function checkGameOver(el){
 // Искуствееный интелект
 function makePCHod(){
     var el = new Object();
-    el.id = getEmptyField();
+    el.id = getGameBox();
+    console.log(el.id);
     hod(el);
 }
 
 function getGameBox(){
-	
+    if(ii.length > 0){
+        console.log("Ходить по стратегии");
+        // TODO предварительная проверка: является ли клетка пустой
+        // Если клетка уже занята, то данная стратегия должна быть удалена из массива. 
+        if(downCount == '1'){
+            if( $("#" + curStrategy.h1).val() == " "){
+                return curStrategy.h1;
+            }
+            else {
+                console.log("Удалить стратегию");
+                ii.pop();// Выталкиваем нерабочую стратегию
+                if(ii.length > 0){// Если есть запасная стратегия - выбираем её
+                    curStrategy = ii[ii.length - 1];
+                }
+                return getGameBox();
+            }
+        }
+        
+        if(downCount == '2'){
+            if( $("#" + curStrategy.h2).val() == " "){
+                return curStrategy.h2;
+            }
+            else {
+                console.log("Удалить стратегию");
+                ii.pop();// Выталкиваем нерабочую стратегию
+                if(ii.length > 0){// Если есть запасная стратегия - выбираем её
+                    curStrategy = ii[ii.length - 1];
+                }
+                return getGameBox();
+            }
+        }
+        if(downCount == '3'){
+            if( $("#" + curStrategy.h3).val() == " "){
+                return curStrategy.h3;
+            }
+            else {
+                console.log("Удалить стратегию");
+                ii.pop();// Выталкиваем нерабочую стратегию
+                if(ii.length > 0){// Если есть запасная стратегия - выбираем её
+                    curStrategy = ii[ii.length - 1];
+                }
+                return getGameBox();
+            }
+        }
+        if(downCount == '4'){
+            if( $("#" + curStrategy.h4).val() == " "){
+                return curStrategy.h4;
+            }
+            else {
+                console.log("Удалить стратегию");
+                ii.pop();// Выталкиваем нерабочую стратегию
+                if(ii.length > 0){// Если есть запасная стратегия - выбираем её
+                    curStrategy = ii[ii.length - 1];
+                }
+                return getGameBox();
+            }
+        }
+        if(downCount == '5'){
+            if( $("#" + curStrategy.h5).val() == " "){
+                return curStrategy.h5;
+            }
+            else {
+                console.log("Удалить стратегию");
+                ii.pop();// Выталкиваем нерабочую стратегию
+                if(ii.length > 0){// Если есть запасная стратегия - выбираем её
+                    curStrategy = ii[ii.length - 1];
+                }
+                return getGameBox();
+            }
+        }
+        if(downCount == '6'){
+            if( $("#" + curStrategy.h6).val() == " "){
+                return curStrategy.h6;
+            }
+            else {
+                console.log("Удалить стратегию");
+                ii.pop();// Выталкиваем нерабочую стратегию
+                if(ii.length > 0){// Если есть запасная стратегия - выбираем её
+                    curStrategy = ii[ii.length - 1];
+                }
+                return getGameBox();
+            }
+        }
+        if(downCount == '7'){
+            if( $("#" + curStrategy.h7).val() == " "){
+                return curStrategy.h7;
+            }
+            else {
+                console.log("Удалить стратегию");
+                ii.pop();// Выталкиваем нерабочую стратегию
+                if(ii.length > 0){// Если есть запасная стратегия - выбираем её
+                    curStrategy = ii[ii.length - 1];
+                }
+                return getGameBox();
+            }
+        }
+        if(downCount == '8'){
+            if( $("#" + curStrategy.h8).val() == " "){
+                return curStrategy.h8;
+            }
+            else {
+                console.log("Удалить стратегию");
+                ii.pop();// Выталкиваем нерабочую стратегию
+                if(ii.length > 0){// Если есть запасная стратегия - выбираем её
+                    curStrategy = ii[ii.length - 1];
+                }
+                return getGameBox();
+            }
+        }
+        if(downCount == '9'){
+            if( $("#" + curStrategy.h9).val() == " "){
+                return curStrategy.h9;
+            }
+            else {
+                console.log("Удалить стратегию");
+                ii.pop();// Выталкиваем нерабочую стратегию
+                if(ii.length > 0){// Если есть запасная стратегия - выбираем её
+                    curStrategy = ii[ii.length - 1];
+                }
+                return getGameBox();
+            }
+        }
+        
+        
+    }
+    else{
+        console.log("Заполнять пустые клетки подряд");
+        if ($("#11").val() == " "){
+            return '11';
+            }
+        if ($("#12").val() == " "){
+                return '12';
+            }
+        if ($("#13").val() == " "){
+                return '13';
+            }
+
+        if ($("#21").val() == " "){
+                return '21';
+            }
+        if ($("#22").val() == " "){
+                return '22';
+            }
+        if ($("#23").val() == " "){
+                return '23';
+            }
+
+        if ($("#31").val() == " "){
+                return '31';
+            }
+        if ($("#32").val() == " "){
+                return '32';
+            }
+        if ($("#33").val() == " "){
+                return '33';
+            }
+    }
 }
 
 function getEmptyField(){
-    if ($("#11").val() == " "){
-            return '11';
-        }
-    if ($("#12").val() == " "){
-            return '12';
-        }
-    if ($("#13").val() == " "){
-            return '13';
-        }
     
-    if ($("#21").val() == " "){
-            return '21';
-        }
-    if ($("#22").val() == " "){
-            return '22';
-        }
-    if ($("#23").val() == " "){
-            return '23';
-        }
-    
-    if ($("#31").val() == " "){
-            return '31';
-        }
-    if ($("#32").val() == " "){
-            return '32';
-        }
-    if ($("#33").val() == " "){
-            return '33';
-        }
-    
-    
-    // TODO предварительная проверка: является ли клетка пустой
-    // Если клетка уже занята, то данная стратегия должна быть удалена из массива. Если все стратегии закончатся - бот должен последовательно заполнять клетки с помощю выше закоментированного кода
-    /*if(downCount == '1'){
-        return ii[0].h1;
-    }
-    if(downCount == '2'){
-        return ii[0].h2;
-    }
-    if(downCount == '3'){
-        return ii[0].h3;
-    }
-    if(downCount == '4'){
-        return ii[0].h4;
-    }
-    if(downCount == '5'){
-        return ii[0].h5;
-    }
-    if(downCount == '6'){
-        return ii[0].h6;
-    }
-    if(downCount == '7'){
-        return ii[0].h7;
-    }
-    if(downCount == '8'){
-        return ii[0].h8;
-    }
-    if(downCount == '9'){
-        return ii[0].h9;
-    }*/
 }
