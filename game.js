@@ -4,18 +4,33 @@ var hods = []; //история ходов
 var winPlayer;
 var ii = [];
 var msg;
+var pcPlayer;
 
-function writeHistory(id){
-    var curHod = {
-        "number": downCount,
-        "player": curPlayer,
-        "id": id
+
+function startScreen() {
+    $('#gameField').html('<h2>Выберите свой символ:</h2><br>');
+    $('#gameField').append('<input type="button" value="X" onclick="gameScreen(\'0\')"><input type="button" value="0" onclick="gameScreen(\'X\')">');
+    
+}
+
+function gameScreen(symbolPC){
+    getIIHods();
+    pcPlayer = symbolPC;
+    $('#gameField').html('');
+    for (i = 1; i < 4; i++){
+        for (j = 1; j < 4; j++){
+            $('#gameField').append('<input class="gameBox" type="button" value=" " onclick="hod(this)" id="' + i + j +'">');
+        }
+        $('#gameField').append('<br>');
     }
-    curHod = JSON.stringify(curHod);
-    hods.push(curHod);
-    console.clear();
-    console.log(hods);
-    //console.log(downCount);
+    console.log(pcPlayer);
+    if (pcPlayer == 'X'){
+        makePCHod();
+        console.log('Первым ходить будет PC');
+    }
+    else {
+        console.log('Первым ходить будет User');
+    }
 }
 
 function gameOver(){
@@ -49,16 +64,24 @@ function gameOver(){
     }
 }
 
-function startScreen() {
-    getIIHods();
-    $('#gameField').html('');
-    for (i = 1; i < 4; i++){
-        for (j = 1; j < 4; j++){
-            $('#gameField').append('<input class="gameBox" type="button" value=" " onclick="hod(this)" id="' + i + j +'">');
-        }
-        $('#gameField').append('<br>');
+function writeHistory(id){
+    var curHod = {
+        "number": downCount,
+        "player": curPlayer,
+        "id": id
     }
+    curHod = JSON.stringify(curHod);
+    hods.push(curHod);
+    console.clear();
+    console.log(hods);
+    //console.log(downCount);
 }
+
+
+
+
+
+
 
 function getIIHods(){
     $.ajax({
@@ -92,12 +115,14 @@ function hod(el){
 function changePlayer(){
     if (curPlayer == 'X'){
         curPlayer = '0';
-        makePCHod();
     }
     else{
         curPlayer = 'X';
     }
-    //downCount++;
+    
+    if(curPlayer == pcPlayer){
+        makePCHod();
+    }
 }
 
 function checkGameOver(el){
@@ -159,8 +184,12 @@ function makePCHod(){
     hod(el);
 }
 
+function getGameBox(){
+	
+}
+
 function getEmptyField(){
-    /*if ($("#11").val() == " "){
+    if ($("#11").val() == " "){
             return '11';
         }
     if ($("#12").val() == " "){
@@ -189,11 +218,11 @@ function getEmptyField(){
     if ($("#33").val() == " "){
             return '33';
         }
-    */
+    
     
     // TODO предварительная проверка: является ли клетка пустой
     // Если клетка уже занята, то данная стратегия должна быть удалена из массива. Если все стратегии закончатся - бот должен последовательно заполнять клетки с помощю выше закоментированного кода
-    if(downCount == '1'){
+    /*if(downCount == '1'){
         return ii[0].h1;
     }
     if(downCount == '2'){
@@ -219,5 +248,5 @@ function getEmptyField(){
     }
     if(downCount == '9'){
         return ii[0].h9;
-    }
+    }*/
 }
