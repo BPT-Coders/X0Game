@@ -106,14 +106,16 @@ function getIIHods(){
 }
 
 function hod(el){
-    writeHistory(el.id);
-    $('#' + el.id).val(curPlayer);
-    if (checkGameOver(el)){
-        gameOver();
-    }
-    else{
-        downCount++;
-        changePlayer();
+    if($('#' + el.id).val() == ' '){
+        writeHistory(el.id);
+        $('#' + el.id).val(curPlayer);
+        if (checkGameOver(el)){
+            gameOver();
+        }
+        else{
+            downCount++;
+            changePlayer();
+        }
     }
 }
 
