@@ -59,9 +59,6 @@ function gameOver(){
                 console.log(response);
 			}
         });
-        
-        
-        
     }
     else{
         console.log("Ничья нам в базе не нужна");
@@ -76,9 +73,6 @@ function writeHistory(id){
     }
     curHod = JSON.stringify(curHod);
     hods.push(curHod);
-    //console.clear();
-    //console.log(hods);
-    //console.log(downCount);
 }
 
 
@@ -98,7 +92,12 @@ function getIIHods(){
 				alert( "Ошибка чтения списка разрешённых ip" );
 			},
 			success: function (response) {
-				ii = response;
+				if(response != null){
+                   ii = response;
+                   }
+                else{
+                   ii = [];
+                   }
                 console.log(ii);
                 console.log(ii.length);
 			}
@@ -188,18 +187,29 @@ function checkGameOver(el){
 function makePCHod(){
     var el = new Object();
     el.id = getGameBox();
-    console.log(el.id);
+    //console.log(el.id);
     hod(el);
 }
 
 function getGameBox(){
     if(ii.length > 0){
         console.log("Ходить по стратегии");
-        // TODO предварительная проверка: является ли клетка пустой
-        // Если клетка уже занята, то данная стратегия должна быть удалена из массива. 
-        if(downCount == '1'){
-            if( $("#" + curStrategy.h1).val() == " "){
-                return curStrategy.h1;
+        console.log(curStrategy);
+        console.log(curStrategy[downCount - 1]);
+        if(curStrategy[downCount - 1] == undefined){
+            console.log('В текущей стратегии нет хода с таким номером');
+            console.log("Удалить стратегию");
+                ii.pop();// Выталкиваем нерабочую стратегию
+                if(ii.length > 0){// Если есть запасная стратегия - выбираем её
+                    curStrategy = ii[ii.length - 1];
+                }
+                return getGameBox();
+        }
+        var hz = JSON.parse(curStrategy[downCount - 1]);
+        console.log(hz.id);
+	
+            if( $("#" + hz.id).val() == " "){
+                return hz.id;
             }
             else {
                 console.log("Удалить стратегию");
@@ -208,115 +218,7 @@ function getGameBox(){
                     curStrategy = ii[ii.length - 1];
                 }
                 return getGameBox();
-            }
-        }
-        
-        if(downCount == '2'){
-            if( $("#" + curStrategy.h2).val() == " "){
-                return curStrategy.h2;
-            }
-            else {
-                console.log("Удалить стратегию");
-                ii.pop();// Выталкиваем нерабочую стратегию
-                if(ii.length > 0){// Если есть запасная стратегия - выбираем её
-                    curStrategy = ii[ii.length - 1];
-                }
-                return getGameBox();
-            }
-        }
-        if(downCount == '3'){
-            if( $("#" + curStrategy.h3).val() == " "){
-                return curStrategy.h3;
-            }
-            else {
-                console.log("Удалить стратегию");
-                ii.pop();// Выталкиваем нерабочую стратегию
-                if(ii.length > 0){// Если есть запасная стратегия - выбираем её
-                    curStrategy = ii[ii.length - 1];
-                }
-                return getGameBox();
-            }
-        }
-        if(downCount == '4'){
-            if( $("#" + curStrategy.h4).val() == " "){
-                return curStrategy.h4;
-            }
-            else {
-                console.log("Удалить стратегию");
-                ii.pop();// Выталкиваем нерабочую стратегию
-                if(ii.length > 0){// Если есть запасная стратегия - выбираем её
-                    curStrategy = ii[ii.length - 1];
-                }
-                return getGameBox();
-            }
-        }
-        if(downCount == '5'){
-            if( $("#" + curStrategy.h5).val() == " "){
-                return curStrategy.h5;
-            }
-            else {
-                console.log("Удалить стратегию");
-                ii.pop();// Выталкиваем нерабочую стратегию
-                if(ii.length > 0){// Если есть запасная стратегия - выбираем её
-                    curStrategy = ii[ii.length - 1];
-                }
-                return getGameBox();
-            }
-        }
-        if(downCount == '6'){
-            if( $("#" + curStrategy.h6).val() == " "){
-                return curStrategy.h6;
-            }
-            else {
-                console.log("Удалить стратегию");
-                ii.pop();// Выталкиваем нерабочую стратегию
-                if(ii.length > 0){// Если есть запасная стратегия - выбираем её
-                    curStrategy = ii[ii.length - 1];
-                }
-                return getGameBox();
-            }
-        }
-        if(downCount == '7'){
-            if( $("#" + curStrategy.h7).val() == " "){
-                return curStrategy.h7;
-            }
-            else {
-                console.log("Удалить стратегию");
-                ii.pop();// Выталкиваем нерабочую стратегию
-                if(ii.length > 0){// Если есть запасная стратегия - выбираем её
-                    curStrategy = ii[ii.length - 1];
-                }
-                return getGameBox();
-            }
-        }
-        if(downCount == '8'){
-            if( $("#" + curStrategy.h8).val() == " "){
-                return curStrategy.h8;
-            }
-            else {
-                console.log("Удалить стратегию");
-                ii.pop();// Выталкиваем нерабочую стратегию
-                if(ii.length > 0){// Если есть запасная стратегия - выбираем её
-                    curStrategy = ii[ii.length - 1];
-                }
-                return getGameBox();
-            }
-        }
-        if(downCount == '9'){
-            if( $("#" + curStrategy.h9).val() == " "){
-                return curStrategy.h9;
-            }
-            else {
-                console.log("Удалить стратегию");
-                ii.pop();// Выталкиваем нерабочую стратегию
-                if(ii.length > 0){// Если есть запасная стратегия - выбираем её
-                    curStrategy = ii[ii.length - 1];
-                }
-                return getGameBox();
-            }
-        }
-        
-        
+            }    
     }
     else{
         console.log("Заполнять пустые клетки подряд");
@@ -350,8 +252,4 @@ function getGameBox(){
                 return '33';
             }
     }
-}
-
-function getEmptyField(){
-    
 }

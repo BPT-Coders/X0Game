@@ -3,8 +3,8 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: localhost
--- Время создания: Сен 23 2017 г., 20:49
--- Версия сервера: 5.5.57-0+deb8u1
+-- Время создания: Сен 30 2017 г., 16:10
+-- Версия сервера: 5.5.52-0+deb8u1
 -- Версия PHP: 5.6.30-0+deb8u1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -28,43 +28,21 @@ SET time_zone = "+00:00";
 
 CREATE TABLE IF NOT EXISTS `games` (
 `id` int(11) NOT NULL,
-  `symbol` varchar(1) CHARACTER SET latin1 NOT NULL,
-  `h1` int(11) DEFAULT NULL,
-  `h2` int(11) DEFAULT NULL,
-  `h3` int(11) DEFAULT NULL,
-  `h4` int(11) DEFAULT NULL,
-  `h5` int(11) DEFAULT NULL,
-  `h6` int(11) DEFAULT NULL,
-  `h7` int(11) DEFAULT NULL,
-  `h8` int(11) DEFAULT NULL,
-  `h9` int(11) DEFAULT NULL,
-  `weight` double DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
+  `history` text NOT NULL,
+  `totalCount` int(11) NOT NULL,
+  `winX` int(11) NOT NULL,
+  `win0` int(11) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `games`
 --
 
-INSERT INTO `games` (`id`, `symbol`, `h1`, `h2`, `h3`, `h4`, `h5`, `h6`, `h7`, `h8`, `h9`, `weight`) VALUES
-(3, 'X', 11, NULL, 22, NULL, 33, NULL, NULL, NULL, NULL, NULL),
-(4, 'X', 11, NULL, 22, NULL, 33, NULL, NULL, NULL, NULL, NULL),
-(5, 'X', 12, NULL, 22, NULL, 32, NULL, NULL, NULL, NULL, NULL),
-(7, '0', NULL, 22, NULL, 31, NULL, 13, NULL, NULL, NULL, NULL),
-(8, '0', NULL, 22, NULL, 31, NULL, 13, NULL, NULL, NULL, NULL),
-(9, '0', NULL, 22, NULL, 31, NULL, 13, NULL, NULL, NULL, NULL),
-(10, '0', NULL, 22, NULL, 13, NULL, 31, NULL, NULL, NULL, NULL),
-(11, 'X', 11, NULL, 21, NULL, 22, NULL, 33, NULL, NULL, NULL),
-(12, 'X', 11, NULL, 21, NULL, 31, NULL, NULL, NULL, NULL, NULL),
-(13, 'X', 11, NULL, 31, NULL, 21, NULL, NULL, NULL, NULL, NULL),
-(14, 'X', 11, NULL, 13, NULL, 33, NULL, 23, NULL, NULL, NULL),
-(15, '0', NULL, 22, NULL, 13, NULL, 31, NULL, NULL, NULL, NULL),
-(16, '0', NULL, 12, NULL, 22, NULL, 32, NULL, NULL, NULL, NULL),
-(17, 'X', 22, NULL, 33, NULL, 11, NULL, NULL, NULL, NULL, NULL),
-(18, '0', NULL, 33, NULL, 31, NULL, 32, NULL, NULL, NULL, NULL),
-(19, 'X', 22, NULL, 13, NULL, 32, NULL, 12, NULL, NULL, NULL),
-(20, '0', NULL, 13, NULL, 11, NULL, 12, NULL, NULL, NULL, NULL),
-(21, 'X', 22, NULL, 11, NULL, 33, NULL, NULL, NULL, NULL, NULL),
-(22, 'X', 22, NULL, 11, NULL, 33, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `games` (`id`, `history`, `totalCount`, `winX`, `win0`) VALUES
+(1, 'a:5:{i:0;s:35:"{"number":1,"player":"X","id":"22"}";i:1;s:35:"{"number":2,"player":"0","id":"11"}";i:2;s:35:"{"number":3,"player":"X","id":"13"}";i:3;s:35:"{"number":4,"player":"0","id":"12"}";i:4;s:35:"{"number":5,"player":"X","id":"31"}";}', 1, 1, 0),
+(2, 'a:6:{i:0;s:35:"{"number":1,"player":"X","id":"22"}";i:1;s:35:"{"number":2,"player":"0","id":"13"}";i:2;s:35:"{"number":3,"player":"X","id":"11"}";i:3;s:35:"{"number":4,"player":"0","id":"33"}";i:4;s:35:"{"number":5,"player":"X","id":"12"}";i:5;s:35:"{"number":6,"player":"0","id":"23"}";}', 1, 0, 1),
+(3, 'a:7:{i:0;s:35:"{"number":1,"player":"X","id":"22"}";i:1;s:35:"{"number":2,"player":"0","id":"13"}";i:2;s:35:"{"number":3,"player":"X","id":"11"}";i:3;s:35:"{"number":4,"player":"0","id":"33"}";i:4;s:35:"{"number":5,"player":"X","id":"23"}";i:5;s:35:"{"number":6,"player":"0","id":"12"}";i:6;s:35:"{"number":7,"player":"X","id":"21"}";}', 3, 3, 0),
+(4, 'a:7:{i:0;s:35:"{"number":1,"player":"X","id":"22"}";i:1;s:35:"{"number":2,"player":"0","id":"13"}";i:2;s:35:"{"number":3,"player":"X","id":"11"}";i:3;s:35:"{"number":4,"player":"0","id":"33"}";i:4;s:35:"{"number":5,"player":"X","id":"23"}";i:5;s:35:"{"number":6,"player":"0","id":"31"}";i:6;s:35:"{"number":7,"player":"X","id":"21"}";}', 1, 1, 0);
 
 --
 -- Индексы сохранённых таблиц
@@ -84,7 +62,7 @@ ALTER TABLE `games`
 -- AUTO_INCREMENT для таблицы `games`
 --
 ALTER TABLE `games`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=23;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
